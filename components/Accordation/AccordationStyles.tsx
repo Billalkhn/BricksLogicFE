@@ -5,7 +5,7 @@ export const AccordionContainer = styled.div`
   max-width: 400px;
   border-radius: 8px;
   margin: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px white;
 `;
 
 export const AccordionHeader = styled.div`
@@ -13,7 +13,6 @@ export const AccordionHeader = styled.div`
   justify-content: space-between;
   padding: 10px;
   cursor: pointer;
-
   color: white;
   border-radius: 8px;
   user-select: none;
@@ -24,13 +23,22 @@ export const AccordionTitle = styled.h3`
   font-size: 18px;
   color: white;
 `;
+
 export const AccordionContent = styled.div<{ open: boolean }>`
   display: ${(props) => (props.open ? 'block' : 'none')};
   padding: 10px;
   color: white;
-  max-height: 150px; /* Set a fixed height to enable the scroll bar always */
-  overflow-y: scroll; /* Use "scroll" to always show the scrollbar */
-  scrollbar-width: thin; /* Add scrollbar styling */
-  scrollbar-color: white #111; /* Add scrollbar styling */
+  max-height: 150px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
   transition: max-height 0.3s ease-in-out;
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: grey;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: white; /* Set the color to white */
+  }
 `;

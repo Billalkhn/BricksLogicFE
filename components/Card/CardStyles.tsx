@@ -2,12 +2,11 @@ import styled from 'styled-components';
 
 export const CardWrapper = styled.div<{ isExpand: boolean }>`
   display: grid;
-  grid-template-columns: 300px;
-  grid-template-rows: ${({ isExpand }) => (isExpand ? '210px 360px 80px' : '210px 210px 80px')};
+  grid-template-columns: 250px;
+  grid-template-rows: ${({ isExpand }) => (isExpand ? '210px 360px 70px' : '210px 210px 60px')};
   grid-template-areas: 'image' 'text' 'stats';
   border-radius: 18px;
-  background: #000;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
+  box-shadow: 5px 5px 10px white;
   text-align: center;
 `;
 

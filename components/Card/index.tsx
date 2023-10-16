@@ -1,4 +1,3 @@
-import { CardType } from '../../Types';
 import { CardWrapper, CardImage, CardTextWrapper, CharacterName, LabelValuePair, Label, Value } from './CardStyles';
 import Tilt from 'react-parallax-tilt';
 import { useState } from 'react';
@@ -25,13 +24,15 @@ const Card = (props: any) => {
       <CardWrapper isExpand={isExpand}>
         <CardImage background={props.image} />
         <CardTextWrapper>
-          <CharacterName>{props.name}</CharacterName>
-          {labelValuePairs.map((pair, index) => (
-            <LabelValuePair key={index}>
-              <Label>{pair.label}:</Label>
-              <Value>{pair.value}</Value>
-            </LabelValuePair>
-          ))}
+          <div style={{ height: '170px' }}>
+            <CharacterName>{props.name}</CharacterName>
+            {labelValuePairs.map((pair, index) => (
+              <LabelValuePair key={index}>
+                <Label>{pair.label}:</Label>
+                <Value>{pair.value}</Value>
+              </LabelValuePair>
+            ))}
+          </div>
           <Accordion
             name="More Episodes"
             episodes={episodes.map((ep) => ep.name)}
