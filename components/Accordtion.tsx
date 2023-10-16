@@ -6,7 +6,7 @@ const AccordionContainer = styled.div`
   max-width: 400px;
   border-radius: 8px;
   margin: 10px;
-  background-color: #5930e5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 `;
 
 const AccordionHeader = styled.div`
@@ -14,7 +14,10 @@ const AccordionHeader = styled.div`
   justify-content: space-between;
   padding: 10px;
   cursor: pointer;
-  background-color: #5930e5;
+
+  color: white;
+  border-radius: 8px;
+  user-select: none;
 `;
 
 const AccordionTitle = styled.h3`
@@ -22,34 +25,32 @@ const AccordionTitle = styled.h3`
   font-size: 18px;
   color: white;
 `;
-
 const AccordionContent = styled.div<{ open: boolean }>`
   display: ${(props) => (props.open ? 'block' : 'none')};
   padding: 10px;
   color: white;
-  max-height: 150px;
-  overflow-y: scroll;
+  max-height: 150px; /* Set a fixed height to enable the scroll bar always */
+  overflow-y: scroll; /* Use "scroll" to always show the scrollbar */
+  scrollbar-width: thin; /* Add scrollbar styling */
+  scrollbar-color: white #111; /* Add scrollbar styling */
+  transition: max-height 0.3s ease-in-out;
 `;
 
 type AccordionProps = {
   name: string;
   episodes: string[];
+  isExpand: boolean;
+  toggleExpand: () => void;
 };
 
-const Accordion: React.FC<AccordionProps> = ({ name, episodes }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleAccordion = () => {
-    setIsOpen(!isOpen);
-  };
-
+const Accordion: React.FC<AccordionProps> = ({ name, episodes, isExpand, toggleExpand }) => {
   return (
     <AccordionContainer>
-      <AccordionHeader onClick={toggleAccordion}>
+      <AccordionHeader onClick={toggleExpand}>
         <AccordionTitle>{name}</AccordionTitle>
-        <div style={{ color: 'white' }}>{isOpen ? '-' : '+'}</div>
+        <div>{isExpand ? '▲' : '▼'}</div>
       </AccordionHeader>
-      <AccordionContent open={isOpen}>
+      <AccordionContent open={isExpand}>
         {episodes.map((episode, index) => (
           <p key={index}>{episode}</p>
         ))}

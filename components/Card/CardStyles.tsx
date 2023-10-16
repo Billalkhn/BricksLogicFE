@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled.div<{ isExpand: boolean }>`
   display: grid;
   grid-template-columns: 300px;
-  grid-template-rows: 210px 210px 80px;
+  grid-template-rows: ${({ isExpand }) => (isExpand ? '210px 360px 80px' : '210px 210px 80px')};
   grid-template-areas: 'image' 'text' 'stats';
   border-radius: 18px;
   background: #000;
