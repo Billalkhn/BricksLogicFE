@@ -6,7 +6,7 @@ let apolloClient: any;
 const authToken = '';
 
 const httpLink = createHttpLink({
-  uri: '',
+  uri: 'https://rickandmortyapi.com/graphql',
 });
 
 const authLink = setContext((_: any, { headers }: any) => {
