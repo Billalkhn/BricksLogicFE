@@ -16,7 +16,7 @@ export const CardImage = styled.div<{ background: string }>`
   background-image: url(${({ background }) => background});
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  background-size: 100% 100%; /* Ensure the image covers the entire div */
+  background-size: 100% 100%;
 `;
 
 export const CardTextWrapper = styled.div`
@@ -25,7 +25,7 @@ export const CardTextWrapper = styled.div`
 `;
 
 export const Status = styled.span<{ isAlive: boolean }>`
-  color: ${(props) => (props.isAlive ? '#00FF00' : '#FF0000')}; /* Bright green for Alive, bright red for Dead */
+  color: ${(props) => (props.isAlive ? '#00FF00' : '#FF0000')};
   font-size: 18px;
 `;
 

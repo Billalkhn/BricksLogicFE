@@ -1,20 +1,14 @@
-import Card from '../../Card';
-import styled from 'styled-components';
-import { useQuery, useLazyQuery } from '@apollo/client';
-import GET_CHARACTERS from '../../../graphQl/functions/getCharacter';
+import Card from '../Card';
+import { useLazyQuery } from '@apollo/client';
+import GET_CHARACTERS from '../../graphQl/queries/getCharacter';
 import { useState, useEffect } from 'react';
-
-const CharactersListContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  background: #1f2229;
-  justify-content: center;
-  padding: 20px;
-`;
-
-const CharacterCardWrapper = styled.div`
-  margin: 10px;
-`;
+import {
+  CharacterCardWrapper,
+  CharactersListContainer,
+  SearchButton,
+  SearchContainer,
+  SearchInput,
+} from './CharaclistStyles';
 
 const CharacterList: React.FC = () => {
   const [page, setPage] = useState(1);
@@ -66,15 +60,15 @@ const CharacterList: React.FC = () => {
 
   return (
     <div className="App">
-      <div>
-        <input
+      <SearchContainer>
+        <SearchInput
           type="text"
           placeholder="Search characters"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
-      </div>
+        <SearchButton onClick={handleSearch}>Search</SearchButton>
+      </SearchContainer>
       <CharactersListContainer>
         {filteredCharacters?.map((character: any) => (
           <CharacterCardWrapper key={character?.id}>

@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import CharacterList from '../components/CharacterList/index.tsx';
+import CharacterList from '../components/CharacterList';
 
 const Home: NextPage = () => {
   return <CharacterList />;

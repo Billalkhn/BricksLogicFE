@@ -1,17 +1,8 @@
 import { CardType } from '../../Types';
-import {
-  CardWrapper,
-  CardImage,
-  CardTextWrapper,
-  Status,
-  CharacterName,
-  LabelValuePair,
-  Label,
-  Value,
-} from './CardStyles';
+import { CardWrapper, CardImage, CardTextWrapper, CharacterName, LabelValuePair, Label, Value } from './CardStyles';
 import Tilt from 'react-parallax-tilt';
-import Accordion from '../Accordtion';
 import { useState } from 'react';
+import Accordion from '../Accordation';
 
 const Card = (props: any) => {
   const labelValuePairs = [
