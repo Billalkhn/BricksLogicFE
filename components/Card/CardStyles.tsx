@@ -94,9 +94,11 @@ export const LabelValuePair = styled.div`
   justify-content: space-between;
   margin: 0;
   color: white;
+  text-align: right;
 `;
 
 export const Label = styled.span`
   font-weight: bold;
   color: white;
+  text-align: left;
 `;

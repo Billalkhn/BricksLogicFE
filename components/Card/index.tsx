@@ -27,18 +27,14 @@ const Card = (props: any) => {
     setIsExpand(!isExpand);
   };
 
-  // Reorder the episodes array to place the first episode at index 1
-  const episodes = [
-    props.episode[0], // First episode
-    ...props.episode.slice(1), // Remaining episodes
-  ];
+  const episodes = [props.episode[0], ...props.episode.slice(1)];
 
   return (
     <Tilt tiltEnable={!isExpand}>
       <CardWrapper isExpand={isExpand}>
         <CardImage background={props.image} />
         <CardTextWrapper>
-          <CharacterName>{name}</CharacterName>
+          <CharacterName>{props.name}</CharacterName>
           {labelValuePairs.map((pair, index) => (
             <LabelValuePair key={index}>
               <Label>{pair.label}:</Label>
