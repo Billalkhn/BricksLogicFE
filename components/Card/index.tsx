@@ -4,11 +4,12 @@ import { useState } from 'react';
 import Accordion from '../Accordation';
 
 const Card = (props: any) => {
+  console.log(props);
   const labelValuePairs = [
     { label: 'Gender', value: props.gender },
     { label: 'Species', value: props.species },
-    { label: 'Last Location', value: props.location.name },
-    { label: 'First Episode', value: props?.episode[0].name },
+    { label: 'Location', value: props.location.name },
+    { label: 'Episode', value: props?.episode[0].name },
   ];
 
   const [isExpand, setIsExpand] = useState(false);

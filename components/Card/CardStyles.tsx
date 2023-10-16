@@ -91,7 +91,6 @@ export const CharacterInfo = styled.div`
 export const LabelValuePair = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0;
   color: white;
   text-align: right;
 `;
