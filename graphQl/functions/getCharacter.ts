@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 const GET_CHARACTERS = gql`
-  query GetCharacters($page: Int) {
-    characters(page: $page) {
+  query GetCharacters($page: Int, $filter: FilterCharacter) {
+    characters(page: $page, filter: $filter) {
       info {
         next
         prev

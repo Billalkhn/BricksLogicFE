@@ -1,6 +1,6 @@
 import Card from '../../Card';
 import styled from 'styled-components';
-import { useQuery } from '@apollo/client';
+import { useQuery, useLazyQuery } from '@apollo/client';
 import GET_CHARACTERS from '../../../graphQl/functions/getCharacter';
 import { useState, useEffect } from 'react';
 
@@ -21,54 +21,69 @@ const CharacterList: React.FC = () => {
   const [characters, setCharacters]: any = useState([]);
   const [hasNextPage, setHasNextPage] = useState(true);
   const [hasPrevPage, setHasPrevPage] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredCharacters, setFilteredCharacters] = useState([]);
+  const [searched, setSearched] = useState(false);
 
-  const { loading, error, data } = useQuery(GET_CHARACTERS, {
-    variables: { page },
-  });
+  const [loadCharacters, { loading, data, error }] = useLazyQuery(GET_CHARACTERS);
 
   useEffect(() => {
-    // Fetch characters when the component mounts
     if (!loading && !error && data) {
       setCharacters(data.characters.results);
+      setFilteredCharacters(data.characters.results);
       setHasNextPage(data.characters.info.next !== null);
       setHasPrevPage(data.characters.info.prev !== null);
+      setSearched(false);
     }
-  }, [loading, error, data]);
+  }, [loading, error, data, searchTerm]);
 
-  if (loading && characters.length === 0) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
-  const newCharacters = data?.characters?.results;
+  useEffect(() => {
+    loadCharacters({ variables: { page, filter: { name: searchTerm } } });
+  }, [page, searchTerm]);
 
   const loadMore = () => {
     const nextPage = page + 1;
-    if (newCharacters) {
-      setCharacters([...newCharacters]);
+    if (hasNextPage && !searched) {
       setPage(nextPage);
-      setHasNextPage(data.characters.info.next !== null);
-      setHasPrevPage(data.characters.info.prev !== null);
+      window.scrollTo(0, 0);
     }
   };
 
   const loadPrevPage = () => {
     const prevPage = page - 1;
-    if (prevPage >= 1) {
+    if (prevPage >= 1 && !searched) {
       setPage(prevPage);
-      setHasNextPage(true);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const handleSearch = () => {
+    if (searchTerm.trim() !== '') {
+      setSearched(true);
+      setPage(1);
     }
   };
 
   return (
     <div className="App">
+      <div>
+        <input
+          type="text"
+          placeholder="Search characters"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button onClick={handleSearch}>Search</button>
+      </div>
       <CharactersListContainer>
-        {characters?.map((character: any) => (
+        {filteredCharacters?.map((character: any) => (
           <CharacterCardWrapper key={character?.id}>
             <Card {...character} />
           </CharacterCardWrapper>
         ))}
       </CharactersListContainer>
-      {hasPrevPage && <button onClick={loadPrevPage}>Previous Page</button>}
-      {hasNextPage && <button onClick={loadMore}>Next Page</button>}
+      {hasPrevPage && !searched && <button onClick={loadPrevPage}>Previous Page</button>}
+      {hasNextPage && !searched && <button onClick={loadMore}>Next Page</button>}
     </div>
   );
 };
