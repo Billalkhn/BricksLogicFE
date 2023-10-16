@@ -1,8 +1,13 @@
 import gql from 'graphql-tag';
 
-const GETCHARACTERS = gql`
-  query {
-    characters {
+const GET_CHARACTERS = gql`
+  query GetCharacters($page: Int) {
+    characters(page: $page) {
+      info {
+        next
+        prev
+        count
+      }
       results {
         id
         name
@@ -21,4 +26,5 @@ const GETCHARACTERS = gql`
     }
   }
 `;
-export default GETCHARACTERS;
+
+export default GET_CHARACTERS;
