@@ -66,6 +66,6 @@ export const Title = styled.div`
   color: transparent;
 
   @media (max-width: 768px) {
-    font-size: 40px; /* Adjust the font size for smaller screens */
+    font-size: 24px; /* Adjust the font size for smaller screens */
   }
 `;
