@@ -12,7 +12,7 @@ import {
   Title,
 } from './CharaclistStyles';
 import CustomButton from '../Common/Button';
-import styled from 'styled-components';
+import Loader from '../Common/Loader';
 
 const CharacterList: React.FC = () => {
   const [page, setPage] = useState(1);
@@ -74,16 +74,21 @@ const CharacterList: React.FC = () => {
         <SearchButton onClick={handleSearch}>Search</SearchButton>
       </SearchContainer>
       <Title>The Rick and Morty Characters</Title>
-      <CharactersListContainer>
-        {filteredCharacters?.map((character: any) => (
-          <CharacterCardWrapper key={character?.id}>
-            <Card {...character} />
-          </CharacterCardWrapper>
-        ))}
-      </CharactersListContainer>
+
+      {loading ? (
+        <Loader />
+      ) : (
+        <CharactersListContainer>
+          {filteredCharacters?.map((character: any) => (
+            <CharacterCardWrapper key={character?.id}>
+              <Card {...character} />
+            </CharacterCardWrapper>
+          ))}
+        </CharactersListContainer>
+      )}
       <PageNavigation>
-        {hasPrevPage && !searched && <CustomButton onClick={loadPrevPage} text="Previous Page" />}
-        {hasNextPage && !searched && <CustomButton onClick={loadMore} text="Next Page" />}
+        {hasPrevPage && !searched && !loading && <CustomButton onClick={loadPrevPage} text="Previous Page" />}
+        {hasNextPage && !searched && !loading && <CustomButton onClick={loadMore} text="Next Page" />}
       </PageNavigation>
     </div>
   );
