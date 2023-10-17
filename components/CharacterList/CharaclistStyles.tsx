@@ -64,4 +64,8 @@ export const Title = styled.div`
   background: linear-gradient(110.78deg, rgb(118, 230, 80) 0%, rgb(249, 214, 73) 15%, rgb(98, 216, 249) 100%);
   -webkit-background-clip: text;
   color: transparent;
+
+  @media (max-width: 768px) {
+    font-size: 40px; /* Adjust the font size for smaller screens */
+  }
 `;
