@@ -1,4 +1,13 @@
-import { CardWrapper, CardImage, CardTextWrapper, CharacterName, LabelValuePair, Label, Value } from './CardStyles';
+import {
+  CardWrapper,
+  CardImage,
+  CardTextWrapper,
+  CharacterName,
+  LabelValuePair,
+  Label,
+  Value,
+  Status,
+} from './CardStyles';
 import Tilt from 'react-parallax-tilt';
 import { useState } from 'react';
 import Accordion from '../Accordation';
@@ -27,6 +36,7 @@ const Card = (props: any) => {
         <CardTextWrapper>
           <div style={{ height: '170px' }}>
             <CharacterName>{props.name}</CharacterName>
+            <Status isAlive={props?.status == 'Alive'}>{props?.status}</Status>
             {labelValuePairs.map((pair, index) => (
               <LabelValuePair key={index}>
                 <Label>{pair.label}:</Label>

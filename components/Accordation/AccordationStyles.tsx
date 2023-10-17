@@ -39,6 +39,6 @@ export const AccordionContent = styled.div<{ open: boolean }>`
 
   &::-webkit-scrollbar-thumb {
     border-radius: 2px;
-    background-color: white; /* Set the color to white */
+    background-color: white;
   }
 `;
