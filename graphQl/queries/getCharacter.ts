@@ -14,6 +14,7 @@ const GET_CHARACTERS = gql`
         type
         image
         gender
+        status
         species
         location {
           id
